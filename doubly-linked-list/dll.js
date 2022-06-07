@@ -103,6 +103,8 @@ class DoublyLinkedList {
         }
         return false;
     }
+
+    insert(index,)
 }
 
 class Node {
