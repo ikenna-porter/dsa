@@ -104,7 +104,45 @@ class DoublyLinkedList {
         return false;
     }
 
-    insert(index,)
+    insert(index, value) {
+        const newNode = new Node(value);
+
+        if (index < 0 || index > this.length) return false;
+        if (index === 0) return !!this.unshift(newNode);
+        if (index === this.length) return !!this.push(newNode);
+
+        const previousNode = this.get(index - 1);
+        const nextNode = previousNode.next;
+
+        //establishes connection with previous node
+        previousNode.next = newNode, newNode.prev = previousNode;
+
+        //establishes connection with next node
+        nextNode.prev = newNode, newNode.next = nextNode;
+
+        this.length++;
+        return true;
+    }
+
+    remove(index) {
+        if (index < 0 || index >= this.length) return undefined;
+        if (index === 0) return this.shift();
+        if (index === this.length - 1) return this.pop();
+
+        const removedNode = this.get(index);
+        const previousNode = removedNode.prev;
+        const nextNode = removedNode.next;
+
+        previousNode.next = nextNode;
+        nextNode.prev = previousNode;
+
+        removedNode.prev = null;
+        removedNode.next = null;
+
+        this.length--;
+
+        return removedNode;
+    }
 }
 
 class Node {
